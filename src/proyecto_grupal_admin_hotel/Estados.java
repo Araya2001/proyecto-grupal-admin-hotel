@@ -5,10 +5,11 @@
 package proyecto_grupal_admin_hotel;
 
 /**
+ *
  * @author Lenovo
  */
 public enum Estados {
-  POR_CONFIRMAR,
-  RESERVADO,
-  DISPONIBLE
+    Por_confirmar, 
+    Reservado, 
+    Disponible
 }

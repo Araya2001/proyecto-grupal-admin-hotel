@@ -5,125 +5,114 @@
 package proyecto_grupal_admin_hotel;
 
 import javax.swing.*;
-
 /**
+ *
  * @author Lenovo
  */
 public class Factura {
-  private Cliente cliente;
-  private int cantPersonas;
-  private String string;
-  private TipoHabitacion tipoHabitacion;
-  private int cantNoches;
+    public String nombre_cliente;
+    public int cant_personas;
+    public int numero_habitacion;
+    public Habitaciones tipo_habitacion;
+    public int cant_noches;
 
-  private DetalleFactura detalleFactura;
-
-  public Factura() {
-    this.cliente = new Cliente();
-    this.cantPersonas = 0;
-    this.string = new String();
-    this.tipoHabitacion = TipoHabitacion.BASICA;
-    this.cantNoches = 0;
-  }
-
-  public Factura(Cliente cliente, int cantPersonas, String string, TipoHabitacion tipoHabitacion, int cantNoches, DetalleFactura detalleFactura) {
-    this.cliente = cliente;
-    this.cantPersonas = cantPersonas;
-    this.string = string;
-    this.tipoHabitacion = tipoHabitacion;
-    this.cantNoches = cantNoches;
-    this.detalleFactura = detalleFactura;
-  }
-
-  public Cliente getCliente() {
-    return cliente;
-  }
-
-  public Factura setCliente(Cliente cliente) {
-    this.cliente = cliente;
-    return this;
-  }
-
-  public java.lang.String getNombreCliente() {
-    return getCliente().getNombre();
-  }
-
-  public void setNombreCliente(java.lang.String nombreCliente) {
-    this.cliente.setNombre(nombreCliente);
-  }
-
-  public int getCantPersonas() {
-    return cantPersonas;
-  }
-
-  public void setCantPersonas(int cantPersonas) {
-    this.cantPersonas = cantPersonas;
-  }
-
-  public String getReservacionHabitacion() {
-    return string;
-  }
-
-  public void setReservacionHabitacion(String string) {
-    this.string = string;
-  }
-
-  public TipoHabitacion getTipoHabitacion() {
-    return tipoHabitacion;
-  }
-
-  public boolean setTipoHabitacion(TipoHabitacion tipo_Tipo_habitacion) {
-    java.lang.String[] habitaciones = {"Basica", "Premium", "Deluxe", "Presidencial"};
-    for (int i = 0; i < habitaciones.length; i++) {
-      if (tipo_Tipo_habitacion == TipoHabitacion.valueOf(habitaciones[i])) {
-        this.tipoHabitacion = tipo_Tipo_habitacion;
-        return true;
-      }
+    public Factura() {
+        this.nombre_cliente = "";
+        this.cant_personas = 0;
+        this.numero_habitacion = 0;
+        this.tipo_habitacion = Habitaciones.Basica;
+        this.cant_noches = 0;
     }
-    JOptionPane.showMessageDialog(null, "Tipo de habitacion incorrecto");
-    return false;
-  }
 
-  public int getCantNoches() {
-    return cantNoches;
-  }
+    public Factura(String nombre_cliente, int cant_personas, int numero_habitacion, Habitaciones tipo_habitacion, int cant_noches) {
+        this.nombre_cliente = nombre_cliente;
+        this.cant_personas = cant_personas;
+        this.numero_habitacion = numero_habitacion;
+        this.tipo_habitacion = tipo_habitacion;
+        this.cant_noches = cant_noches;
+    }
 
-  public void setCantNoches(int cantNoches) {
-    this.cantNoches = cantNoches;
-  }
+    public String getNombre_cliente() {
+        return nombre_cliente;
+    }
 
-  public java.lang.String mostrar_Info() {
-    return ("\n------------------------------------------------\n"
-        + "Nombre del cliente:                   " + this.getNombreCliente() + "\n"
-        + "Identificación del cliente:           " + this.getCliente().getId() + "\n"
-        + "Cantidad de personas:                 " + this.getCantPersonas() + "\n"
-        + "Numero de habitacion:                 " + this.getReservacionHabitacion().getIdHabitacion() + "\n"
-        + "Tipo habitacion:                      " + this.getTipoHabitacion() + "\n"
-        + "Cantidad de noches de hospedaje:      " + this.getCantNoches() + "\n"
-        + "------------------------------------------------\n");
-  }
+    public void setNombre_cliente(String nombre_cliente) {
+        this.nombre_cliente = nombre_cliente;
+    }
 
-  public java.lang.String desplegarFactura() {
-    TipoHabitacion tipoHabitacion = getTipoHabitacion();
-    int PrecioHabitacion = tipoHabitacion.getPrecio();
-    double bruto = (PrecioHabitacion * this.getCantPersonas()) * this.getCantNoches();
-    double IVA = bruto * 0.13;
-    double total = bruto + IVA;
-    return ("Factura de habitacion: " + this.getReservacionHabitacion() + "\n"
-        + "------------------------------------------------\n"
-        + "Nombre del cliente:                   " + this.getNombreCliente() + "\n"
-        + "Cantidad de personas:                 " + this.getCantPersonas() + "\n"
-        + "Numero de habitacion:                 " + this.getReservacionHabitacion().getIdHabitacion() + "\n"
-        + "Tipo habitacion:                      " + this.getTipoHabitacion() + "\n"
-        + "Cantidad de noches de hospedaje:      " + this.getCantNoches() + "\n"
-        + "\n"
-        + "Precio por noche:                     " + PrecioHabitacion
-        + "\n------------------------------------------------\n"
-        + "\n"
-        + "A pagar:                              " + bruto + "\n"
-        + "IVA:                                  " + IVA + "\n"
-        + "\n"
-        + "Total a pagar (con IVA):                        " + total
-        + "\n------------------------------------------------\n");
-  }
+    public int getCant_personas() {
+        return cant_personas;
+    }
+
+    public void setCant_personas(int cant_personas) {
+        this.cant_personas = cant_personas;
+    }
+
+    public int getNumero_habitacion() {
+        return numero_habitacion;
+    }
+
+    public void setNumero_habitacion(int numero_habitacion) {
+        this.numero_habitacion = numero_habitacion;
+    }
+
+    public Habitaciones getTipo_habitacion() {
+        return tipo_habitacion;
+    }
+
+    public boolean setTipo_habitacion(Habitaciones tipo_habitacion) {
+        String[] habitaciones = {"Basica","Premium","Deluxe","Presidencial"};
+        for (int i=0; i<habitaciones.length; i++){
+            if (tipo_habitacion == Habitaciones.valueOf(habitaciones[i])){
+                this.tipo_habitacion = tipo_habitacion;
+                return true;
+            }
+        }
+        JOptionPane.showMessageDialog(null,"Tipo de habitacion incorrecto");
+        return false;
+    }
+
+    public int getCant_noches() {
+        return cant_noches;
+    }
+
+    public void setCant_noches(int cant_noches) {
+        this.cant_noches = cant_noches;
+    }
+
+    public String mostrar_Info(){
+        return ("\n------------------------------------------------\n"
+                + "Nombre del cliente:                   "+ this.getNombre_cliente()+"\n"
+                + "Cantidad de personas:                 "+this.getCant_personas()+"\n"
+                + "Numero de habitacion:                 "+this.getNumero_habitacion()+"\n"
+                + "Tipo habitacion:                      "+this.getTipo_habitacion()+"\n"
+                + "Cantidad de noches de hospedaje:      "+this.getCant_noches()+"\n"
+                + "------------------------------------------------\n");
+    }
+
+    public String desplegar_factura(){
+        Habitaciones habitacion = getTipo_habitacion();
+        int PrecioHabitacion = habitacion.getPrecio();
+        double bruto = (PrecioHabitacion*this.getCant_personas())*this.getCant_noches();
+        double IVA = bruto*0.13;
+        double total = bruto+IVA;
+        return ("Factura de habitacion: " + this.getNumero_habitacion()+"\n"
+                + "------------------------------------------------\n"
+                + "Nombre del cliente:                   "+ this.getNombre_cliente()+"\n"
+                + "Cantidad de personas:                 "+this.getCant_personas()+"\n"
+                + "Numero de habitacion:                 "+this.getNumero_habitacion()+"\n"
+                + "Tipo habitacion:                      "+this.getTipo_habitacion()+"\n"
+                + "Cantidad de noches de hospedaje:      "+this.getCant_noches()+"\n"
+                + "\n"
+                + "Precio por noche:                     "+PrecioHabitacion
+                + "\n------------------------------------------------\n"
+                + "\n"
+                + "A pagar:                              "+bruto+"\n"
+                + "IVA:                                  "+IVA+"\n"
+                + "\n"
+                + "Total a pagar (con IVA):                        "+total
+                +"\n------------------------------------------------\n");
+    }
+
+
 }
