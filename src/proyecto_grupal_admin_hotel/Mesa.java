@@ -45,21 +45,4 @@ public class Mesa {
     this.asientosDisponibles = asientosDisponibles;
     return this;
   }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Mesa mesa = (Mesa) o;
-    return idMesa == mesa.idMesa && asientosDisponibles == mesa.asientosDisponibles && disponibilidad == mesa.disponibilidad;
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(idMesa, asientosDisponibles, disponibilidad);
-  }
 }

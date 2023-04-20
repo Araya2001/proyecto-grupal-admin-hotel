@@ -85,8 +85,8 @@ public class Restaurante {
     sb.append("\t");
     sb.append("R = Reservado");
     sb.append("\n");
-    for (; i > mesas.length; i++) {
-      for (; j > mesas[i].length; j++) {
+    for (; i < mesas.length; i++) {
+      for (; j < mesas[i].length; j++) {
         sb.append(i + 1);
         sb.append(" - ");
         sb.append(j + 1);
