@@ -183,6 +183,54 @@ public class ReservaRestaurante {
     return sb.toString();
   }
 
+  public String desglose() {
+    Double montoSubtotal = 0.0;
+    Double montoPorUnidad;
+    StringBuilder sb = new StringBuilder();
+    sb.append("Desglose: ");
+    sb.append(this.restaurante.getNombre());
+    sb.append("\n");
+    sb.append("------------------------------------------------");
+    sb.append("\n");
+    sb.append("Nombre del cliente: ");
+    sb.append(this.nombreCliente);
+    sb.append("\n");
+    sb.append("Tipo de comida: ");
+    sb.append(this.tipoComida.getValor());
+    sb.append("\n");
+    sb.append("------------------------------------------------");
+    sb.append("\n");
+    sb.append("Detalle: ");
+    sb.append("\n");
+    sb.append("Comentario\t\tCantidad\tMonto\tSubtotal");
+    sb.append("\n");
+    for (int i = 0; i < this.detalleRestaurante.length; i++) {
+      montoPorUnidad = this.detalleRestaurante[i].getMonto() * detalleRestaurante[i].getCantidad();
+      sb.append(this.detalleRestaurante[i].getComentario());
+      sb.append("\t\t");
+      sb.append(this.detalleRestaurante[i].getCantidad());
+      sb.append("\t");
+      sb.append(this.detalleRestaurante[i].getMonto());
+      sb.append("\t");
+      sb.append(montoPorUnidad);
+      sb.append("\n");
+      montoSubtotal += montoPorUnidad;
+    }
+    sb.append("\n");
+    sb.append("------------------------------------------------");
+    sb.append("\n");
+    sb.append("Subtotal: ");
+    sb.append(montoSubtotal);
+    sb.append("\n");
+    sb.append("Cantidad de Acompañantes: ");
+    sb.append(this.cuposReservados);
+    sb.append("\n");
+    sb.append("Monto por persona (Sugerido): ");
+    sb.append(montoSubtotal / this.cuposReservados);
+    sb.append("\n");
+    return sb.toString();
+  }
+
   public void cancelarReserva() {
     setEsConfirmada(false);
     setEsCancelada(true);
