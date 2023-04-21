@@ -9,7 +9,17 @@ package proyecto_grupal_admin_hotel;
  * @author Lenovo
  */
 public enum Estados {
-    Por_confirmar, 
-    Reservado, 
-    Disponible
+    Por_confirmar,
+    Reservado,
+    Disponible;
+
+  public static Estados obtenerEstadoConNombre(String name) {
+    Estados[] estados = Estados.values();
+    for (int i = 0; i < estados.length; i++) {
+      if (estados[i].name().equalsIgnoreCase(name)) {
+        return estados[i];
+      }
+    }
+    return null;
+  }
 }

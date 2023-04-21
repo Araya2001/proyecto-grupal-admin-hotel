@@ -5,7 +5,6 @@
 package proyecto_grupal_admin_hotel;
 
 import javax.swing.*;
-import java.math.BigDecimal;
 
 /**
  * @author Lenovo
@@ -31,7 +30,6 @@ public class Proyecto_grupal_admin_hotel {
       return Integer.parseInt(valor);
     }
     return 99;
-
   }
 
   public static void main(String[] args) {
@@ -70,7 +68,6 @@ public class Proyecto_grupal_admin_hotel {
       restaurantes[i].setNombre("Restaurante " + i + 1);
       restaurantes[i].setCapacidad(5 * 5 * 6);
     }
-
     boolean loop = true;
     while (loop) {
       switch (desplegar_menu()) {
@@ -84,11 +81,28 @@ public class Proyecto_grupal_admin_hotel {
           JOptionPane.showMessageDialog(frame, obtenerReservasHabitacionDisponibles(reservacionHabitaciones));
           break;
         case 4:
-          JOptionPane.showInputDialog("1. Habitación ");
+          String seleccion = JOptionPane.showInputDialog("1. Habitación\n2. Restaurante");
+          if (seleccion.equals("1")) {
+            crearReservacionHabtacion(reservacionHabitaciones, Integer.parseInt(JOptionPane.showInputDialog("Ingresar número de habitación")));
+          } else if (seleccion.equals("2")) {
+            crearReservacionRestaurante(reservaRestaurantes, restaurantes, Integer.parseInt(JOptionPane.showInputDialog("Ingresar identificador de Restaurante")));
+          }
           break;
         case 5:
+          Reservacion_Habitacion reservacionHabitacionDespliegue = obtenerReservacionHabitacionPorId(reservacionHabitaciones, Integer.parseInt(JOptionPane.showInputDialog("Ingresar número de habitación")));
+          if (reservacionHabitacionDespliegue != null) {
+            JOptionPane.showMessageDialog(frame, reservacionHabitacionDespliegue.desplegar_reserva());
+          } else {
+            JOptionPane.showMessageDialog(frame, "Error: No se encontró reserva de habitación");
+          }
           break;
         case 6:
+          Reservacion_Habitacion reservacionHabitacionFactura = obtenerReservacionHabitacionPorId(reservacionHabitaciones, Integer.parseInt(JOptionPane.showInputDialog("Ingresar número de habitación")));
+          if (reservacionHabitacionFactura != null) {
+            JOptionPane.showMessageDialog(frame, reservacionHabitacionFactura.mostrarFactura());
+          } else {
+            JOptionPane.showMessageDialog(frame, "Error: No se encontró reserva de habitación");
+          }
           break;
         case 7:
           break;
@@ -130,6 +144,18 @@ public class Proyecto_grupal_admin_hotel {
     return sb.toString();
   }
 
+  private static void crearReservacionHabtacion(Reservacion_Habitacion[] reservacionHabitaciones, int id) {
+    Reservacion_Habitacion reservacionHabitacion = obtenerReservacionHabitacionPorId(reservacionHabitaciones, id);
+    if (reservacionHabitacion != null) {
+      reservacionHabitacion.setNombre_cliente("Nombre del cliente");
+      reservacionHabitacion.setEstado_reserva(Estados.obtenerEstadoConNombre(JOptionPane.showInputDialog("Registrar estado de reserva: \n" + Estados.Reservado + ", " + Estados.Por_confirmar)));
+      reservacionHabitacion.setCant_noches(Integer.parseInt("Cantidad de noches a reservar"));
+      reservacionHabitacion.setCant_personas(Integer.parseInt("Cantidad de personas en la habitación"));
+    } else {
+      JOptionPane.showMessageDialog(null, "Error: No se logró crear la reservación");
+    }
+  }
+
   private static String obtenerReservasHabitacion(Reservacion_Habitacion[] reservacionHabitaciones) {
     StringBuilder sb = new StringBuilder();
     sb.append("Todas las reservas: ");
@@ -156,7 +182,6 @@ public class Proyecto_grupal_admin_hotel {
         sb.append(reservacionHabitaciones[i].getTipo_habitacion());
         sb.append("\n");
       }
-
     }
     return sb.toString();
   }
