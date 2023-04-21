@@ -85,11 +85,14 @@ public class Restaurante {
     sb.append("    ");
     sb.append("R = Reservado");
     sb.append("\n");
-    for (; i < mesas.length; i++) {
-      for (; j < mesas[i].length; j++) {
-        sb.append(i + 1);
-        sb.append(" - ");
-        sb.append(j + 1);
+    System.out.println(mesas.length);
+    for (i = 0; i < mesas.length; i++) {
+      System.out.println(i);
+      for (j = 0; j < mesas[i].length; j++) {
+        System.out.println(j);
+        sb.append(i);
+        sb.append("-");
+        sb.append(j);
         sb.append("(");
         sb.append(mesas[i][j].getDisponibilidad() ? "D" : "R");
         sb.append(")");

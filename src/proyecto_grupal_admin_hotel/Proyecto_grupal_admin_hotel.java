@@ -292,10 +292,10 @@ public class Proyecto_grupal_admin_hotel {
     Mesa[][] mesasDeRestaurante = restaurante.getMesas();
     Mesa[] mesasAElegir = new Mesa[0];
     int i = 0, j = 0, k = 0;
-    for (; i < mesasSeparadas.length; i++) {
+    for (i = 0; i < mesasSeparadas.length; i++) {
       mesasAElegir = new Mesa[mesasAElegir.length + 1];
-      for (; j < mesasDeRestaurante.length; j++) {
-        for (; k < mesasDeRestaurante[j].length; k++) {
+      for (j = 0; j < mesasDeRestaurante.length; j++) {
+        for (k = 0; k < mesasDeRestaurante[j].length; k++) {
           if (mesasDeRestaurante[j][k].getIdMesa().equals(mesasSeparadas[i])) {
             mesasAElegir[i] = mesasDeRestaurante[j][k];
           }
@@ -311,8 +311,8 @@ public class Proyecto_grupal_admin_hotel {
   private static Mesa[][] crearMesas() {
     Mesa[][] mesas = new Mesa[5][5];
     int i = 0, j = 0;
-    for (; i < mesas.length; i++) {
-      for (; j < mesas[i].length; j++) {
+    for (i = 0; i < mesas.length; i++) {
+      for (j = 0; j < mesas[i].length; j++) {
         mesas[i][j] = new Mesa().setIdMesa(i + "-" + j).setDisponibilidad(true).setAsientosDisponibles(6);
       }
     }
