@@ -63,6 +63,49 @@ public class Proyecto_grupal_admin_hotel {
     }
   }
 
+  private static Restaurante obtenerRestaurantePorId(Restaurante[] restaurantes, int id) {
+    if (id > 0 && id <= restaurantes.length) {
+      return restaurantes[id - 1];
+    }
+    return null;
+  }
+
+  private static Reservacion_Habitacion obtenerReservacionHabitacionPorNombreCliente(Reservacion_Habitacion[] reservacionHabitacions, String nombre) {
+    for (int i = 0; i < reservacionHabitacions.length; i++) {
+      if (reservacionHabitacions[i].getNombre_cliente().equalsIgnoreCase(nombre)) {
+        return reservacionHabitacions[i];
+      }
+    }
+    return null;
+  }
+
+  private static Reservacion_Habitacion obtenerReservacionHabitacionPorId(Reservacion_Habitacion[] reservacionHabitacions, int id) {
+    if (id > 0 && id <= reservacionHabitacions.length) {
+      return reservacionHabitacions[id - 1];
+    }
+    return null;
+  }
+
+  private static ReservaRestaurante obtenerReservacionRestaurantePorNombreCliente(ReservaRestaurante[] ReservaRestaurante, String nombre) {
+    for (int i = 0; i < ReservaRestaurante.length; i++) {
+      if (ReservaRestaurante[i].getNombreCliente().equalsIgnoreCase(nombre)) {
+        return ReservaRestaurante[i];
+      }
+    }
+    return null;
+  }
+
+  private static ReservaRestaurante obtenerReservacionRestaurantePorId(ReservaRestaurante[] ReservaRestaurante, int id) {
+    if (id > 0 && id <= ReservaRestaurante.length) {
+      return ReservaRestaurante[id - 1];
+    }
+    return null;
+  }
+
+  private static void crearReservacionRestaurante(){
+
+  }
+
   private static void inicializarDatos(Restaurante[] restaurantes, ReservaRestaurante[] reservaRestaurantes, Reservacion_Habitacion[] reservacionHabitaciones) {
     int cantidadRestaurantes = 4;
     int cantidadHabitaciones = 50;
