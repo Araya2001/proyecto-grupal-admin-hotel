@@ -30,16 +30,50 @@ public class Proyecto_grupal_admin_hotel {
   }
 
   public static void main(String[] args) {
-    Restaurante[] restaurantes = new Restaurante[0];
-    ReservaRestaurante[] reservaRestaurantes = new ReservaRestaurante[0];
-    Reservacion_Habitacion[] reservacionHabitaciones = new Reservacion_Habitacion[0];
-    inicializarDatos(restaurantes, reservaRestaurantes, reservacionHabitaciones);
+    int cantidadRestaurantes = 4;
+    int cantidadHabitaciones = 50;
+    int inicioHabitacion = 96;
+    JFrame frame = new JFrame();
+    Restaurante[] restaurantes;
+    ReservaRestaurante[] reservaRestaurantes;
+    Reservacion_Habitacion[] reservacionHabitaciones;
+    restaurantes = new Restaurante[cantidadRestaurantes];
+    reservaRestaurantes = new ReservaRestaurante[0];
+    reservacionHabitaciones = new Reservacion_Habitacion[cantidadHabitaciones];
+    for (int i = 0; i < cantidadHabitaciones; i++) {
+      reservacionHabitaciones[i] = new Reservacion_Habitacion();
+      reservacionHabitaciones[i].setCant_noches(0);
+      reservacionHabitaciones[i].setNumero_habitacion(inicioHabitacion);
+      reservacionHabitaciones[i].setCant_personas(0);
+      reservacionHabitaciones[i].setCant_noches(0);
+      reservacionHabitaciones[i].setNombre_cliente("");
+      reservacionHabitaciones[i].setEstado_reserva(Estados.Disponible);
+      if (i <= 24) {
+        reservacionHabitaciones[i].setTipo_habitacion(Habitaciones.Basica);
+      } else if (i <= 39) {
+        reservacionHabitaciones[i].setTipo_habitacion(Habitaciones.Premium);
+      } else if (i <= 45) {
+        reservacionHabitaciones[i].setTipo_habitacion(Habitaciones.Deluxe);
+      } else {
+        reservacionHabitaciones[i].setTipo_habitacion(Habitaciones.Presidencial);
+      }
+      inicioHabitacion++;
+    }
+    for (int i = 0; i < cantidadRestaurantes; i++) {
+      restaurantes[i] = new Restaurante();
+      restaurantes[i].setMesas(crearMesas());
+      restaurantes[i].setNombre("Restaurante " + i + 1);
+      restaurantes[i].setCapacidad(5 * 5 * 6);
+    }
+
     boolean loop = true;
     while (loop) {
       switch (desplegar_menu()) {
         case 1:
+          JOptionPane.showMessageDialog(frame, obtenerReservasRestaurante(reservaRestaurantes, restaurantes));
           break;
         case 2:
+          JOptionPane.showMessageDialog(frame, obtenerReservasHabitacion(reservacionHabitaciones));
           break;
         case 3:
           break;
@@ -63,6 +97,44 @@ public class Proyecto_grupal_admin_hotel {
     }
   }
 
+  private static String obtenerReservasRestaurante(ReservaRestaurante[] reservaRestaurantes, Restaurante[] restaurantes) {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Restaurantes disponibles: ");
+    sb.append("\n");
+    for (int i = 0; i < restaurantes.length; i++) {
+      sb.append(i + 1);
+      sb.append(". ");
+      sb.append(restaurantes[i].getNombre());
+      sb.append("\n");
+    }
+    sb.append("Reservas realizadas: ");
+    sb.append("\n");
+    for (int i = 0; i < reservaRestaurantes.length; i++) {
+      sb.append(i + 1);
+      sb.append(". ");
+      sb.append(reservaRestaurantes[i].getRestaurante().getNombre());
+      sb.append(" - Reservado por: ");
+      sb.append(reservaRestaurantes[i].getNombreCliente());
+      sb.append("\n");
+    }
+    return sb.toString();
+  }
+
+  private static String obtenerReservasHabitacion(Reservacion_Habitacion[] reservacionHabitaciones) {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Todas las reservas: ");
+    sb.append("\n");
+    for (int i = 0; i < reservacionHabitaciones.length; i++) {
+      sb.append(reservacionHabitaciones[i].getNumero_habitacion());
+      sb.append(". ");
+      sb.append(reservacionHabitaciones[i].getTipo_habitacion());
+      sb.append(" - Disponibilidad: ");
+      sb.append(reservacionHabitaciones[i].getEstado_reserva());
+      sb.append("\n");
+    }
+    return sb.toString();
+  }
+
   private static Restaurante obtenerRestaurantePorId(Restaurante[] restaurantes, int id) {
     if (id > 0 && id <= restaurantes.length) {
       return restaurantes[id - 1];
@@ -81,7 +153,7 @@ public class Proyecto_grupal_admin_hotel {
 
   private static Reservacion_Habitacion obtenerReservacionHabitacionPorId(Reservacion_Habitacion[] reservacionHabitacions, int id) {
     if (id > 0 && id <= reservacionHabitacions.length) {
-      return reservacionHabitacions[id - 1];
+      return reservacionHabitacions[id - 96];
     }
     return null;
   }
@@ -145,42 +217,14 @@ public class Proyecto_grupal_admin_hotel {
     return mesasAElegir;
   }
 
-  private static void inicializarDatos(Restaurante[] restaurantes, ReservaRestaurante[] reservaRestaurantes, Reservacion_Habitacion[] reservacionHabitaciones) {
-    int cantidadRestaurantes = 4;
-    int cantidadHabitaciones = 50;
-    int inicioHabitacion = 96;
-    restaurantes = new Restaurante[cantidadRestaurantes];
-    reservaRestaurantes = new ReservaRestaurante[0];
-    reservacionHabitaciones = new Reservacion_Habitacion[cantidadHabitaciones];
-    for (int i = 0; i < cantidadHabitaciones; i++) {
-      reservacionHabitaciones[i] = new Reservacion_Habitacion();
-      reservacionHabitaciones[i].setCant_noches(0);
-      reservacionHabitaciones[i].setNumero_habitacion(inicioHabitacion);
-      reservacionHabitaciones[i].setCant_personas(0);
-      reservacionHabitaciones[i].setCant_noches(0);
-      reservacionHabitaciones[i].setNombre_cliente("");
-      reservacionHabitaciones[i].setEstado_reserva(Estados.Disponible);
-      if (i <= 24) {
-        reservacionHabitaciones[i].setTipo_habitacion(Habitaciones.Basica);
-      } else if (i <= 39) {
-        reservacionHabitaciones[i].setTipo_habitacion(Habitaciones.Premium);
-      } else if (i <= 45) {
-        reservacionHabitaciones[i].setTipo_habitacion(Habitaciones.Deluxe);
-      } else {
-        reservacionHabitaciones[i].setTipo_habitacion(Habitaciones.Presidencial);
-      }
-    }
-    for (int i = 0; i < cantidadRestaurantes; i++) {
-      restaurantes[i] = new Restaurante();
-      restaurantes[i].setMesas(crearMesas());
-    }
+  private void inicializarDatos(Restaurante[] restaurantes, ReservaRestaurante[] reservaRestaurantes, Reservacion_Habitacion[] reservacionHabitaciones) {
   }
 
   private static Mesa[][] crearMesas() {
     Mesa[][] mesas = new Mesa[5][5];
     int i = 0, j = 0;
     for (; i < mesas.length; i++) {
-      for (; j < mesas[i].length; i++) {
+      for (; j < mesas[i].length; j++) {
         mesas[i][j] = new Mesa().setIdMesa(i + "-" + j).setDisponibilidad(true).setAsientosDisponibles(6);
       }
     }
