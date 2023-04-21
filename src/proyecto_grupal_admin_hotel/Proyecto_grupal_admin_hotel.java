@@ -25,7 +25,8 @@ public class Proyecto_grupal_admin_hotel {
         + "8. Desplegar la factura para cierta reserva de restaurante \n"
         + "9. Cancelar reserva habitaciones \n"
         + "10. Cancelar reserva de restaurantes \n"
-        + "11. Salir \n");
+        + "11. Mostrar mesas de un restaurante \n"
+        + "12. Salir \n");
     if (valor != null) {
       return Integer.parseInt(valor);
     }
@@ -65,7 +66,7 @@ public class Proyecto_grupal_admin_hotel {
     for (int i = 0; i < cantidadRestaurantes; i++) {
       restaurantes[i] = new Restaurante();
       restaurantes[i].setMesas(crearMesas());
-      restaurantes[i].setNombre("Restaurante " + i + 1);
+      restaurantes[i].setNombre("Restaurante " + (i + 1));
       restaurantes[i].setCapacidad(5 * 5 * 6);
     }
     boolean loop = true;
@@ -105,17 +106,53 @@ public class Proyecto_grupal_admin_hotel {
           }
           break;
         case 7:
+          ReservaRestaurante reservaRestauranteDespliegue = obtenerReservacionRestaurantePorId(reservaRestaurantes, Integer.parseInt(JOptionPane.showInputDialog("Ingresar identificador de la Reservación")));
+          if (reservaRestauranteDespliegue != null) {
+            JOptionPane.showMessageDialog(frame, reservaRestauranteDespliegue.desplegarInformacion());
+          } else {
+            JOptionPane.showMessageDialog(frame, "Error: No se encontró reserva del restaurante");
+          }
           break;
         case 8:
+          ReservaRestaurante reservaRestauranteFactura = obtenerReservacionRestaurantePorId(reservaRestaurantes, Integer.parseInt(JOptionPane.showInputDialog("Ingresar identificador de la Reservación")));
+          if (reservaRestauranteFactura != null) {
+            JOptionPane.showMessageDialog(frame, reservaRestauranteFactura.mostrarFactura());
+          } else {
+            JOptionPane.showMessageDialog(frame, "Error: No se encontró reserva del restaurante");
+          }
           break;
         case 9:
+          Reservacion_Habitacion reservacionHabitacion = obtenerReservacionHabitacionPorId(reservacionHabitaciones, Integer.parseInt(JOptionPane.showInputDialog("Ingresar número de habitación")));
+          if (reservacionHabitacion != null) {
+            reservacionHabitacion.cancela_reserva(Estados.Disponible);
+            reservacionHabitacion.setNombre_cliente("");
+            reservacionHabitacion.setCant_personas(0);
+            reservacionHabitacion.setCant_noches(0);
+          } else {
+            JOptionPane.showMessageDialog(frame, "Error: No se encontró reserva de habitación");
+          }
           break;
         case 10:
+          ReservaRestaurante reservaRestaurante = obtenerReservacionRestaurantePorId(reservaRestaurantes, Integer.parseInt(JOptionPane.showInputDialog("Ingresar identificador de la Reservación")));
+          if (reservaRestaurante != null) {
+            reservaRestaurante.cancelarReserva();
+          } else {
+            JOptionPane.showMessageDialog(frame, "Error: No se encontró reserva del restaurante");
+          }
           break;
         case 11:
+          Restaurante restaurante = obtenerRestaurantePorId(restaurantes, Integer.parseInt(JOptionPane.showInputDialog("Ingresar identificador del Restaurante")));
+          if (restaurante != null) {
+            JOptionPane.showMessageDialog(frame, restaurante.desplegarMesas());
+          } else {
+            JOptionPane.showMessageDialog(frame, "Error: No se encontró reserva del restaurante");
+          }
+          break;
+        case 12:
+          loop = false;
           break;
         default:
-          loop = false;
+          JOptionPane.showMessageDialog(frame, "Error: Por favor ingresar una opción válida");
           break;
       }
     }

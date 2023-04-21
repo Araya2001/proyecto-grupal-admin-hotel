@@ -118,18 +118,18 @@ public class ReservaRestaurante {
     sb.append("\n");
     sb.append("Detalle comprobante: ");
     sb.append("\n");
-    sb.append("Comentario\t\tCantidad\tMonto\tSubtotal\tTotal (IVA)");
+    sb.append("Comentario        Cantidad    Monto    Subtotal    Total (IVA)");
     sb.append("\n");
     for (int i = 0; i < this.detalleRestaurante.length; i++) {
       montoPorUnidad = this.detalleRestaurante[i].getMonto() * detalleRestaurante[i].getCantidad();
       sb.append(this.detalleRestaurante[i].getComentario());
-      sb.append("\t\t");
+      sb.append("        ");
       sb.append(this.detalleRestaurante[i].getCantidad());
-      sb.append("\t");
+      sb.append("    ");
       sb.append(this.detalleRestaurante[i].getMonto());
-      sb.append("\t");
+      sb.append("    ");
       sb.append(montoPorUnidad);
-      sb.append("\t");
+      sb.append("    ");
       sb.append(montoPorUnidad * 1.13);
       sb.append("\n");
       montoSubtotal += montoPorUnidad;
@@ -202,16 +202,16 @@ public class ReservaRestaurante {
     sb.append("\n");
     sb.append("Detalle: ");
     sb.append("\n");
-    sb.append("Comentario\t\tCantidad\tMonto\tSubtotal");
+    sb.append("Comentario        Cantidad    Monto    Subtotal");
     sb.append("\n");
     for (int i = 0; i < this.detalleRestaurante.length; i++) {
       montoPorUnidad = this.detalleRestaurante[i].getMonto() * detalleRestaurante[i].getCantidad();
       sb.append(this.detalleRestaurante[i].getComentario());
-      sb.append("\t\t");
+      sb.append("        ");
       sb.append(this.detalleRestaurante[i].getCantidad());
-      sb.append("\t");
+      sb.append("    ");
       sb.append(this.detalleRestaurante[i].getMonto());
-      sb.append("\t");
+      sb.append("    ");
       sb.append(montoPorUnidad);
       sb.append("\n");
       montoSubtotal += montoPorUnidad;
