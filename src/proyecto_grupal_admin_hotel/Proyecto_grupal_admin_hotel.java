@@ -5,6 +5,7 @@
 package proyecto_grupal_admin_hotel;
 
 import javax.swing.*;
+import java.math.BigDecimal;
 
 /**
  * @author Lenovo
@@ -14,7 +15,7 @@ public class Proyecto_grupal_admin_hotel {
    * @param args the command line arguments
    */
   public static int desplegar_menu() {
-    int respuesta = Integer.parseInt(JOptionPane.showInputDialog(null, "Menu de opciones: \n"
+    String valor = JOptionPane.showInputDialog(null, "Menu de opciones: \n"
         + "1. Desplegar lista de reservas del restaurante \n"
         + "2. Desplegar lista de reservas de habitaciones \n"
         + "3. Desplegar habitaciones libres \n"
@@ -25,8 +26,12 @@ public class Proyecto_grupal_admin_hotel {
         + "8. Desplegar la factura para cierta reserva de restaurante \n"
         + "9. Cancelar reserva habitaciones \n"
         + "10. Cancelar reserva de restaurantes \n"
-        + "11. Salir \n"));
-    return respuesta;
+        + "11. Salir \n");
+    if (valor != null) {
+      return Integer.parseInt(valor);
+    }
+    return 99;
+
   }
 
   public static void main(String[] args) {
@@ -76,8 +81,10 @@ public class Proyecto_grupal_admin_hotel {
           JOptionPane.showMessageDialog(frame, obtenerReservasHabitacion(reservacionHabitaciones));
           break;
         case 3:
+          JOptionPane.showMessageDialog(frame, obtenerReservasHabitacionDisponibles(reservacionHabitaciones));
           break;
         case 4:
+          JOptionPane.showInputDialog("1. Habitación ");
           break;
         case 5:
           break;
@@ -92,6 +99,9 @@ public class Proyecto_grupal_admin_hotel {
         case 10:
           break;
         case 11:
+          break;
+        default:
+          loop = false;
           break;
       }
     }
@@ -131,6 +141,22 @@ public class Proyecto_grupal_admin_hotel {
       sb.append(" - Disponibilidad: ");
       sb.append(reservacionHabitaciones[i].getEstado_reserva());
       sb.append("\n");
+    }
+    return sb.toString();
+  }
+
+  private static String obtenerReservasHabitacionDisponibles(Reservacion_Habitacion[] reservacionHabitaciones) {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Todas las reservas: ");
+    sb.append("\n");
+    for (int i = 0; i < reservacionHabitaciones.length; i++) {
+      if (reservacionHabitaciones[i].getEstado_reserva() == Estados.Disponible) {
+        sb.append(reservacionHabitaciones[i].getNumero_habitacion());
+        sb.append(". ");
+        sb.append(reservacionHabitaciones[i].getTipo_habitacion());
+        sb.append("\n");
+      }
+
     }
     return sb.toString();
   }
