@@ -82,11 +82,11 @@ public class Factura {
 
     public String mostrar_Info(){
         return ("\n------------------------------------------------\n"
-                + "Nombre del cliente:                   "+ this.getNombre_cliente()+"\n"
-                + "Cantidad de personas:                 "+this.getCant_personas()+"\n"
-                + "Numero de habitacion:                 "+this.getNumero_habitacion()+"\n"
-                + "Tipo habitacion:                      "+this.getTipo_habitacion()+"\n"
-                + "Cantidad de noches de hospedaje:      "+this.getCant_noches()+"\n"
+                + "Nombre del cliente: "+ this.getNombre_cliente()+"\n"
+                + "Cantidad de personas: "+this.getCant_personas()+"\n"
+                + "Numero de habitacion: "+this.getNumero_habitacion()+"\n"
+                + "Tipo habitacion: "+this.getTipo_habitacion()+"\n"
+                + "Cantidad de noches de hospedaje: "+this.getCant_noches()+"\n"
                 + "------------------------------------------------\n");
     }
 
@@ -98,19 +98,19 @@ public class Factura {
         double total = bruto+IVA;
         return ("Factura de habitacion: " + this.getNumero_habitacion()+"\n"
                 + "------------------------------------------------\n"
-                + "Nombre del cliente:                   "+ this.getNombre_cliente()+"\n"
-                + "Cantidad de personas:                 "+this.getCant_personas()+"\n"
-                + "Numero de habitacion:                 "+this.getNumero_habitacion()+"\n"
-                + "Tipo habitacion:                      "+this.getTipo_habitacion()+"\n"
-                + "Cantidad de noches de hospedaje:      "+this.getCant_noches()+"\n"
+                + "Nombre del cliente: "+ this.getNombre_cliente()+"\n"
+                + "Cantidad de personas: "+this.getCant_personas()+"\n"
+                + "Numero de habitacion: "+this.getNumero_habitacion()+"\n"
+                + "Tipo habitacion: "+this.getTipo_habitacion()+"\n"
+                + "Cantidad de noches de hospedaje: "+this.getCant_noches()+"\n"
                 + "\n"
-                + "Precio por noche:                     "+PrecioHabitacion
+                + "Precio por noche: "+PrecioHabitacion
                 + "\n------------------------------------------------\n"
                 + "\n"
-                + "A pagar:                              "+bruto+"\n"
-                + "IVA:                                  "+IVA+"\n"
+                + "A pagar: "+bruto+"\n"
+                + "IVA: "+IVA+"\n"
                 + "\n"
-                + "Total a pagar (con IVA):                        "+total
+                + "Total a pagar (con IVA): "+total
                 +"\n------------------------------------------------\n");
     }
 

@@ -123,13 +123,13 @@ public class ReservaRestaurante {
     for (int i = 0; i < this.detalleRestaurante.length; i++) {
       montoPorUnidad = this.detalleRestaurante[i].getMonto() * detalleRestaurante[i].getCantidad();
       sb.append(this.detalleRestaurante[i].getComentario());
-      sb.append("        ");
+      sb.append(" ");
       sb.append(this.detalleRestaurante[i].getCantidad());
-      sb.append("    ");
+      sb.append(" ");
       sb.append(this.detalleRestaurante[i].getMonto());
-      sb.append("    ");
+      sb.append(" ");
       sb.append(montoPorUnidad);
-      sb.append("    ");
+      sb.append(" ");
       sb.append(montoPorUnidad * 1.13);
       sb.append("\n");
       montoSubtotal += montoPorUnidad;
@@ -207,11 +207,11 @@ public class ReservaRestaurante {
     for (int i = 0; i < this.detalleRestaurante.length; i++) {
       montoPorUnidad = this.detalleRestaurante[i].getMonto() * detalleRestaurante[i].getCantidad();
       sb.append(this.detalleRestaurante[i].getComentario());
-      sb.append("        ");
+      sb.append(" ");
       sb.append(this.detalleRestaurante[i].getCantidad());
-      sb.append("    ");
+      sb.append(" ");
       sb.append(this.detalleRestaurante[i].getMonto());
-      sb.append("    ");
+      sb.append(" ");
       sb.append(montoPorUnidad);
       sb.append("\n");
       montoSubtotal += montoPorUnidad;
@@ -259,13 +259,13 @@ public class ReservaRestaurante {
   @Override
   public String toString() {
     return "ReservaRestaurante{" +
-        "nombreCliente='" + nombreCliente + '\'' +
-        ", cuposReservados=" + cuposReservados +
-        ", restaurante=" + restaurante +
-        ", tipoComida=" + tipoComida +
-        ", mesa=" + mesas +
-        ", esConfirmada=" + esConfirmada +
-        ", detalleRestaurante=" + Arrays.toString(detalleRestaurante) +
+ "nombreCliente='" + nombreCliente + '\'' +
+ ", cuposReservados=" + cuposReservados +
+ ", restaurante=" + restaurante +
+ ", tipoComida=" + tipoComida +
+ ", mesa=" + mesas +
+ ", esConfirmada=" + esConfirmada +
+ ", detalleRestaurante=" + Arrays.toString(detalleRestaurante) +
         '}';
   }
 }

@@ -82,7 +82,7 @@ public class Restaurante {
     StringBuilder sb = new StringBuilder();
     int i = 0, j = 0;
     sb.append("D = Disponible");
-    sb.append("    ");
+    sb.append(" ");
     sb.append("R = Reservado");
     sb.append("\n");
     System.out.println(mesas.length);
@@ -96,7 +96,7 @@ public class Restaurante {
         sb.append("(");
         sb.append(mesas[i][j].getDisponibilidad() ? "D" : "R");
         sb.append(")");
-        sb.append("    ");
+        sb.append(" ");
       }
       sb.append("\n");
     }
