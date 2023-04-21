@@ -102,7 +102,66 @@ public class Proyecto_grupal_admin_hotel {
     return null;
   }
 
-  private static void crearReservacionRestaurante() {
+  private static void crearReservacionRestaurante(ReservaRestaurante[] reservaRestaurantes, Restaurante[] restaurantes, int idRestaurante) {
+    ReservaRestaurante[] reservaRestaurantesAux = new ReservaRestaurante[reservaRestaurantes.length + 1];
+    for (int i = 0; i < reservaRestaurantes.length - 1; i++) {
+      reservaRestaurantesAux[i] = reservaRestaurantes[i];
+    }
+    String nombreCliente = JOptionPane.showInputDialog("Nombre del cliente");
+    TipoComida tipoComida = TipoComida.obtenerTipoComidaConValor(JOptionPane.showInputDialog("Indique el tipo de comida:\nDesayuno, almuerzo ó cena"));
+    int cuposReservados = Integer.parseInt(JOptionPane.showInputDialog("Cantidad de personas que le acompañan"));
+    Mesa[] mesas = obtenerMesas(obtenerRestaurantePorId(restaurantes, idRestaurante), JOptionPane.showInputDialog("Seleccione mesas, si desea seleccionar más de una mesa, por favor separarlas con una coma \",\""));
+    DetalleRestaurante[] detalles = new DetalleRestaurante[cuposReservados];
+    for (int i = 0; i < cuposReservados; i++) {
+      detalles[i] = new DetalleRestaurante().setMonto(tipoComida.getMonto()).setComentario(tipoComida.getValor() + i + 1).setCantidad(1);
+    }
+    reservaRestaurantesAux[reservaRestaurantes.length] = new ReservaRestaurante()
+        .setRestaurante(obtenerRestaurantePorId(restaurantes, idRestaurante))
+        .setEsCancelada(false)
+        .setEsConfirmada(true)
+        .setNombreCliente(nombreCliente)
+        .setCuposReservados(cuposReservados)
+        .setTipoComida(tipoComida)
+        .setMesas(mesas)
+        .setDetalleRestaurante(detalles);
+  }
+
+  private static DetalleRestaurante[] obtenerDetalle(restaurante, String stringMesas) {
+    stringMesas = stringMesas.replace(" ", "");
+    String[] mesasSeparadas = stringMesas.split(",");
+    Mesa[][] mesasDeRestaurante = restaurante.getMesas();
+    Mesa[] mesasAElegir = new Mesa[0];
+    int i = 0, j = 0, k = 0;
+    for (; i < mesasSeparadas.length; i++) {
+      mesasAElegir = new Mesa[mesasAElegir.length + 1];
+      for (; j < mesasDeRestaurante.length; j++) {
+        for (; k < mesasDeRestaurante[j].length; k++) {
+          if (mesasDeRestaurante[j][k].getIdMesa().equals(mesasSeparadas[i])) {
+            mesasAElegir[i] = mesasDeRestaurante[j][k];
+          }
+        }
+      }
+    }
+    return mesasAElegir;
+  }
+
+  private static Mesa[] obtenerMesas(Restaurante restaurante, String stringMesas) {
+    stringMesas = stringMesas.replace(" ", "");
+    String[] mesasSeparadas = stringMesas.split(",");
+    Mesa[][] mesasDeRestaurante = restaurante.getMesas();
+    Mesa[] mesasAElegir = new Mesa[0];
+    int i = 0, j = 0, k = 0;
+    for (; i < mesasSeparadas.length; i++) {
+      mesasAElegir = new Mesa[mesasAElegir.length + 1];
+      for (; j < mesasDeRestaurante.length; j++) {
+        for (; k < mesasDeRestaurante[j].length; k++) {
+          if (mesasDeRestaurante[j][k].getIdMesa().equals(mesasSeparadas[i])) {
+            mesasAElegir[i] = mesasDeRestaurante[j][k];
+          }
+        }
+      }
+    }
+    return mesasAElegir;
   }
 
   private static void inicializarDatos(Restaurante[] restaurantes, ReservaRestaurante[] reservaRestaurantes, Reservacion_Habitacion[] reservacionHabitaciones) {
