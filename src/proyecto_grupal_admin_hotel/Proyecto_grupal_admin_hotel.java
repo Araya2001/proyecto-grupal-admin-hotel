@@ -86,7 +86,7 @@ public class Proyecto_grupal_admin_hotel {
           if (seleccion.equals("1")) {
             crearReservacionHabtacion(reservacionHabitaciones, Integer.parseInt(JOptionPane.showInputDialog("Ingresar número de habitación")));
           } else if (seleccion.equals("2")) {
-            crearReservacionRestaurante(reservaRestaurantes, restaurantes, Integer.parseInt(JOptionPane.showInputDialog("Ingresar identificador de Restaurante")));
+            reservaRestaurantes = crearReservacionRestaurante(reservaRestaurantes, restaurantes, Integer.parseInt(JOptionPane.showInputDialog("Ingresar identificador de Restaurante")));
           }
           break;
         case 5:
@@ -186,8 +186,8 @@ public class Proyecto_grupal_admin_hotel {
     if (reservacionHabitacion != null) {
       reservacionHabitacion.setNombre_cliente("Nombre del cliente");
       reservacionHabitacion.setEstado_reserva(Estados.obtenerEstadoConNombre(JOptionPane.showInputDialog("Registrar estado de reserva: \n" + Estados.Reservado + ", " + Estados.Por_confirmar)));
-      reservacionHabitacion.setCant_noches(Integer.parseInt("Cantidad de noches a reservar"));
-      reservacionHabitacion.setCant_personas(Integer.parseInt("Cantidad de personas en la habitación"));
+      reservacionHabitacion.setCant_noches(Integer.parseInt(JOptionPane.showInputDialog("Cantidad de noches a reservar")));
+      reservacionHabitacion.setCant_personas(Integer.parseInt(JOptionPane.showInputDialog("Cantidad de personas en la habitación")));
     } else {
       JOptionPane.showMessageDialog(null, "Error: No se logró crear la reservación");
     }
@@ -239,9 +239,10 @@ public class Proyecto_grupal_admin_hotel {
     return null;
   }
 
-  private static Reservacion_Habitacion obtenerReservacionHabitacionPorId(Reservacion_Habitacion[] reservacionHabitacions, int id) {
-    if (id > 0 && id <= reservacionHabitacions.length) {
-      return reservacionHabitacions[id - 96];
+  private static Reservacion_Habitacion obtenerReservacionHabitacionPorId(Reservacion_Habitacion[] reservacionHabitaciones, int id) {
+    System.out.println(reservacionHabitaciones.length);
+    if (id >= 96 && id <= 146) {
+      return reservacionHabitaciones[id - 96];
     }
     return null;
   }
@@ -262,7 +263,7 @@ public class Proyecto_grupal_admin_hotel {
     return null;
   }
 
-  private static void crearReservacionRestaurante(ReservaRestaurante[] reservaRestaurantes, Restaurante[] restaurantes, int idRestaurante) {
+  private static ReservaRestaurante[] crearReservacionRestaurante(ReservaRestaurante[] reservaRestaurantes, Restaurante[] restaurantes, int idRestaurante) {
     ReservaRestaurante[] reservaRestaurantesAux = new ReservaRestaurante[reservaRestaurantes.length + 1];
     for (int i = 0; i < reservaRestaurantes.length - 1; i++) {
       reservaRestaurantesAux[i] = reservaRestaurantes[i];
@@ -270,10 +271,13 @@ public class Proyecto_grupal_admin_hotel {
     String nombreCliente = JOptionPane.showInputDialog("Nombre del cliente");
     TipoComida tipoComida = TipoComida.obtenerTipoComidaConValor(JOptionPane.showInputDialog("Indique el tipo de comida:\nDesayuno, almuerzo ó cena"));
     int cuposReservados = Integer.parseInt(JOptionPane.showInputDialog("Cantidad de personas que le acompañan"));
-    Mesa[] mesas = obtenerMesas(obtenerRestaurantePorId(restaurantes, idRestaurante), JOptionPane.showInputDialog("Seleccione mesas, si desea seleccionar más de una mesa, por favor separarlas con una coma \",\""));
+    Mesa[] mesas = obtenerMesas(obtenerRestaurantePorId(restaurantes, idRestaurante), JOptionPane.showInputDialog("Seleccione mesa"));
     DetalleRestaurante[] detalles = new DetalleRestaurante[cuposReservados];
     for (int i = 0; i < cuposReservados; i++) {
       detalles[i] = new DetalleRestaurante().setMonto(tipoComida.getMonto()).setComentario(tipoComida.getValor() + i + 1).setCantidad(1);
+    }
+    for (int i = 0; i < mesas.length; i++) {
+      mesas[i].setDisponibilidad(false);
     }
     reservaRestaurantesAux[reservaRestaurantes.length] = new ReservaRestaurante()
         .setRestaurante(obtenerRestaurantePorId(restaurantes, idRestaurante))
@@ -284,6 +288,7 @@ public class Proyecto_grupal_admin_hotel {
         .setTipoComida(tipoComida)
         .setMesas(mesas)
         .setDetalleRestaurante(detalles);
+    return reservaRestaurantesAux;
   }
 
   private static Mesa[] obtenerMesas(Restaurante restaurante, String stringMesas) {
