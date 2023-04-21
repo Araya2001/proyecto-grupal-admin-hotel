@@ -102,8 +102,7 @@ public class Proyecto_grupal_admin_hotel {
     return null;
   }
 
-  private static void crearReservacionRestaurante(){
-
+  private static void crearReservacionRestaurante() {
   }
 
   private static void inicializarDatos(Restaurante[] restaurantes, ReservaRestaurante[] reservaRestaurantes, Reservacion_Habitacion[] reservacionHabitaciones) {
@@ -123,9 +122,9 @@ public class Proyecto_grupal_admin_hotel {
       reservacionHabitaciones[i].setEstado_reserva(Estados.Disponible);
       if (i <= 24) {
         reservacionHabitaciones[i].setTipo_habitacion(Habitaciones.Basica);
-      } else if (i >= 25 && i <= 39) {
+      } else if (i <= 39) {
         reservacionHabitaciones[i].setTipo_habitacion(Habitaciones.Premium);
-      } else if (i >= 40 && i <= 45) {
+      } else if (i <= 45) {
         reservacionHabitaciones[i].setTipo_habitacion(Habitaciones.Deluxe);
       } else {
         reservacionHabitaciones[i].setTipo_habitacion(Habitaciones.Presidencial);
